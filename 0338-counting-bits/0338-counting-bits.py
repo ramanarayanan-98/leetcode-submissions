@@ -7,7 +7,7 @@ class Solution:
         count = 1
         
         for i in range(1,n+1):
-            if count*2 == i:
+            if count << 1 == i:
                 count = i
             res.append(res[i-count]+1)
         
