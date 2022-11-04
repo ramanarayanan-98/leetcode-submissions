@@ -8,14 +8,10 @@ class Solution:
             
         count = 2
         
-        while len(res) < n+1:
-            for _ in range(count):
-                if len(res) == n+1:
-                    break
-                res.append(res[len(res)-count]+1)
-            count *= 2
-            
-            
+        for i in range(2,n+1):
+            if count*2 == i:
+                count = i
+            res.append(res[i-count]+1)
         
         return res
                 
