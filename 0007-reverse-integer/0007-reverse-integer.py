@@ -3,15 +3,16 @@ class Solution:
         twop31 = 2**31
         pmaxlimit = twop31-1
         nmaxlimit = -twop31
-        isNeg = x < 0
-        x = -x if isNeg else x
         res = 0
         while x:
-            d = x%10
-            x //= 10
-            res = res*10 + d
-            if res > pmaxlimit:
+            d = int(math.fmod(x,10))
+            x = int(x/10)
+            if res > pmaxlimit//10 or (res == pmaxlimit//10 and d > 7):
                 return 0
+            if res < int(nmaxlimit/10) or (res == int(nmaxlimit/10) and d < -8):
+                return 0
+            res = res*10 + d
+            
         
-        return res if not isNeg else -res
+        return res
             
