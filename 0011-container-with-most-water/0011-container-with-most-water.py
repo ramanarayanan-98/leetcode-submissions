@@ -4,10 +4,11 @@ class Solution:
         maxArea = 0
         
         while start < end:
-            maxArea = max(maxArea,(end-start)*min(height[start],height[end]))
-            
-            if min(height[start],height[end]) == height[start]:
+            diff = end-start
+            if height[start] <= height[end]:
+                maxArea = max(maxArea,diff*height[start])
                 start += 1
             else:
+                maxArea = max(maxArea,diff*height[end])
                 end -= 1
         return maxArea
