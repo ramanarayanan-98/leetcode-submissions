@@ -1,19 +1,21 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        n = len(height)
-        rightMax = [0 for _ in range(n)]
-        maxTillNow = 0
-        for i in range(n-1,-1,-1):
-            rightMax[i] = maxTillNow
-            maxTillNow = max(maxTillNow,height[i])
+        start,end = 0,len(height)-1
+        trapArea,leftmax,rightmax = 0,0,0
         
-        maxTillNow = 0
-        trapArea = 0
-        
-        for i in range(n):
-            value = min(maxTillNow,rightMax[i])-height[i]
-            trapArea += value if value > 0 else 0
-            maxTillNow = max(maxTillNow,height[i])
+        while start < end:
+            if height[start] <= height[end]:
+                if height[start] >= leftmax:
+                    leftmax = height[start]
+                else:
+                    trapArea += (leftmax-height[start])
+                start += 1
+            else:
+                if height[end] >= rightmax:
+                    rightmax = height[end]
+                else:
+                    trapArea += (rightmax-height[end])
+                end -= 1
         
         return trapArea
             
