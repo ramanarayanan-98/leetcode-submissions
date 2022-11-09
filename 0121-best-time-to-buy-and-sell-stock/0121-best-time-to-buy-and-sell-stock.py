@@ -4,9 +4,7 @@ class Solution:
         maxProfit = 0
         
         for price in prices:
-            if price >= minTillNow:
-                maxProfit = max(maxProfit,price-minTillNow)
-            else:
-                minTillNow = price
+            maxProfit = max(maxProfit,price-minTillNow)
+            minTillNow = min(minTillNow,price)
         
         return maxProfit
