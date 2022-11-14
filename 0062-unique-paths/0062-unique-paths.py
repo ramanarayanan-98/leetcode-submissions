@@ -1,10 +1,14 @@
 class Solution:
-    def fact(self,num):
+    def uniquePathHelper(self,m,n):
         prod = 1
-        for i in range(num,1,-1):
+        for i in range(m+1,m+n+1):
             prod *= i
-        return prod
+            prod /= (i-m)
+        return int(prod)
     def uniquePaths(self, m: int, n: int) -> int:
         m -= 1
         n -= 1
-        return self.fact(m+n)//(self.fact(m)*self.fact(n))
+        if m < n:
+            m,n = n,m
+        
+        return self.uniquePathHelper(m,n)
