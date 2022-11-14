@@ -8,23 +8,20 @@ class Solution:
             
             visited.add(curnode)
             
-            for i in range(len(adjmat)):
-                if i in visited:
+            for nei in adjmat[curnode]:
+                if nei in visited:
                     continue
-                if adjmat[curnode][i] == float("inf"):
-                    continue
-                olddist = dist[i]
-                newdist = curdist + adjmat[curnode][i]
+                
+                olddist = dist[nei]
+                newdist = curdist + adjmat[curnode][nei]
                 
                 if newdist < olddist:
-                    heapq.heappush(minheap,[newdist,i])
-                    dist[i] = newdist
+                    heapq.heappush(minheap,[newdist,nei])
+                    dist[nei] = newdist
             
             
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        adjmat = [[float(inf) for _ in range(n)]for _ in range(n)]
-        for i in range(n):
-            adjmat[i][i] = 0
+        adjmat = [dict() for _ in range(n)]
         
         for time in times:
             adjmat[time[0]-1][time[1]-1] = time[2]
